@@ -15,12 +15,15 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from DQN import DQN, ACTIVATION_MODE, TANH_ACTIVATION
+from ADQN import TANH_ACTIVATION
+from DQCNN import DQCNN
+from DQDN import DQDN
 from GameContext import gen_train_data, tuple_states_to_int_array, return_train_data_list
 from GamePath import GamePath, symmetric_rotations
 from GameState import INITIAL_GAME_STATE
 from random import choice
 
+import ADQN
 import Utilities
 import numpy as np
 import time
@@ -39,7 +42,8 @@ EXPLOIT_DEPTHS = [1000, 1000, 500, 200, 200, 50, 30, 4, 2, 1]
 # especially if TOTAL_SIMULATIONS < OPTIMAL_MCTS_COUNT so that the data generated from MCTS game mode can train and
 # enhance the NN performance.
 INCREMENTAL_NN = True
-_agent = DQN()
+# 2 options, either use dense NN or convolutional NN.
+_agent = DQDN()  # DQCNN()
 
 # For TANH activation
 def create_nn_check_for_tanh():
@@ -141,7 +145,7 @@ def create_nn_check_for_relu_and_sigmoid():
 # or under-training. We are using this check list as a proxy to determine when we can stop training. Noticed that too
 # much checks caused problem for the NN during training sometimes i.e. it runs indefinitely. Perhaps, the checks are
 # made redundant by optimization within the NN.
-_check_list = create_nn_check_for_tanh() if ACTIVATION_MODE == TANH_ACTIVATION else \
+_check_list = create_nn_check_for_tanh() if ADQN.ACTIVATION_MODE == TANH_ACTIVATION else \
               create_nn_check_for_relu_and_sigmoid()
 
 
@@ -149,7 +153,7 @@ def _dqn_move(game_board):
   states = game_board.states
   curr_arr = tuple_states_to_int_array(states)
 
-  rfc_state = np.asarray(curr_arr).reshape((1, 9))
+  rfc_state = np.asarray(curr_arr).reshape(_agent.input_shape)
   prediction = _agent.model.predict(rfc_state)
   idx = prediction[0, :].argsort()[::-1]
 
