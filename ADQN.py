@@ -82,6 +82,20 @@ class ADQN(ABC):
       tup_out = self.queue.popleft()
       self.memory.remove(tup_out)
 
+  def train_short_memory(self, init_arr, next_move, reward, next_arr, done):
+    # reshaped and flattened current and new state
+    rfc_state = np.asarray(init_arr).reshape(self.input_shape)
+    rfn_state = np.asarray(next_arr).reshape(self.input_shape)
+
+    target = reward
+    if not done:
+      target = reward + self.gamma * np.amax(self.model.predict(rfn_state)[0])
+
+    future_target = self.model.predict(rfc_state)
+
+    future_target[0][next_move] = target
+    self.model.fit(rfc_state, future_target, epochs=1, verbose=0)
+
   def replay(self, complete=False, check_list=[]):
     global reset_count, weight_reset_size
     pass_check = False
@@ -162,8 +176,6 @@ class ADQN(ABC):
   def network(self, weights=None, batch=0):
     pass
 
-  @abstractmethod
-  def train_short_memory(self, init_arr, next_move, reward, next_arr, done):
-    pass
+
 
 
