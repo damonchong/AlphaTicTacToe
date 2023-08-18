@@ -17,7 +17,7 @@
 """
 from ADQN import TANH_ACTIVATION
 from DQCNN import DQCNN
-from DQDN import DQDN
+from DQDNN import DQDNN
 from GameContext import gen_train_data, tuple_states_to_int_array, return_train_data_list
 from GamePath import GamePath, symmetric_rotations
 from GameState import INITIAL_GAME_STATE
@@ -43,7 +43,7 @@ EXPLOIT_DEPTHS = [1000, 1000, 500, 200, 200, 50, 30, 4, 2, 1]
 # enhance the NN performance.
 INCREMENTAL_NN = True
 # 2 options, either use dense NN or convolutional NN.
-_agent = DQDN()  # DQCNN()
+_agent = DQCNN()  # DQDNN()
 
 # For TANH activation
 def create_nn_check_for_tanh():
