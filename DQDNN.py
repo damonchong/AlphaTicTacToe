@@ -34,7 +34,7 @@ def split_batch(iterable, n=1, reverse=False):
     yield iterable[ndx:min(ndx + n, sz)]
 
 # Deep Q Dense Neural Network
-class DQDN(ADQN.ADQN):
+class DQDNN(ADQN.ADQN):
 
   def __init__(self):
     ADQN.ACTIVATION_MODE = TANH_ACTIVATION

@@ -42,22 +42,6 @@ class DQCNN(ADQN.ADQN):
 
     return model
 
-  def plot(self, train_dropout):
-    accuracy = train_dropout.history['acc']
-    val_accuracy = train_dropout.history['val_acc']
-    loss = train_dropout.history['loss']
-    val_loss = train_dropout.history['val_loss']
-    epochs = range(len(accuracy))
-    plt.plot(epochs, accuracy, 'bo', label='Training accuracy')
-    plt.plot(epochs, val_accuracy, 'b', label='Validation accuracy')
-    plt.title('Training and validation accuracy')
-    plt.legend()
-    plt.figure()
-    plt.plot(epochs, loss, 'bo', label='Training loss')
-    plt.plot(epochs, val_loss, 'b', label='Validation loss')
-    plt.title('Training and validation loss')
-    plt.legend()
-    plt.show()
 
 if __name__ == "__main__":
   agent = DQCNN()
