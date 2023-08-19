@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from ADQN import TANH_ACTIVATION
+from ADQNN import TANH_ACTIVATION
 from DQCNN import DQCNN
 from DQDNN import DQDNN
 from GameContext import gen_train_data, tuple_states_to_int_array, return_train_data_list
@@ -23,7 +23,7 @@ from GamePath import GamePath, symmetric_rotations
 from GameState import INITIAL_GAME_STATE
 from random import choice
 
-import ADQN
+import ADQNN
 import Utilities
 import numpy as np
 import time
@@ -145,7 +145,7 @@ def create_nn_check_for_relu_and_sigmoid():
 # or under-training. We are using this check list as a proxy to determine when we can stop training. Noticed that too
 # much checks caused problem for the NN during training sometimes i.e. it runs indefinitely. Perhaps, the checks are
 # made redundant by optimization within the NN.
-_check_list = create_nn_check_for_tanh() if ADQN.ACTIVATION_MODE == TANH_ACTIVATION else \
+_check_list = create_nn_check_for_tanh() if ADQNN.ACTIVATION_MODE == TANH_ACTIVATION else \
               create_nn_check_for_relu_and_sigmoid()
 
 

@@ -15,24 +15,24 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from ADQN import RELU_ACTIVATION, SIGMOID_ACTIVATION, TANH_ACTIVATION
+from ADQNN import RELU_ACTIVATION, SIGMOID_ACTIVATION, TANH_ACTIVATION
 from typing import Any, Callable
 
-import ADQN
+import ADQNN
 
 # Key: Path string. Value: GameState instance.
 AllPath2State = dict()
 
 
 def tuple_states_to_int_array(tup):
-  if ADQN.ACTIVATION_MODE == TANH_ACTIVATION:
+  if ADQNN.ACTIVATION_MODE == TANH_ACTIVATION:
     bool2int: Callable[[Any], int] = lambda f: (1 if f is True else (-1 if f is False else 0))
-  elif ADQN.ACTIVATION_MODE == RELU_ACTIVATION:
+  elif ADQNN.ACTIVATION_MODE == RELU_ACTIVATION:
     bool2int: Callable[[Any], int] = lambda f: (1 if f is True else (2 if f is False else 0))
-  elif ADQN.ACTIVATION_MODE == SIGMOID_ACTIVATION:
+  elif ADQNN.ACTIVATION_MODE == SIGMOID_ACTIVATION:
     bool2int: Callable[[Any], int] = lambda f: (1 if f is True else (2 if f is False else 0))
   else:
-    raise ValueError(f"Unsupported activation: {ADQN.ACTIVATION_MODE}!")
+    raise ValueError(f"Unsupported activation: {ADQNN.ACTIVATION_MODE}!")
   arr = [bool2int(tup[idx]) for idx in range(9)]
   return arr
 
