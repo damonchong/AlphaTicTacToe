@@ -15,12 +15,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from ADQN import TANH_ACTIVATION
+from ADQNN import TANH_ACTIVATION
 from keras.layers.core import Dense, Dropout
 from keras.models import Sequential
 from keras.optimizers import Adam
 
-import ADQN
+import ADQNN
 
 
 def split_batch(iterable, n=1, reverse=False):
@@ -34,10 +34,10 @@ def split_batch(iterable, n=1, reverse=False):
     yield iterable[ndx:min(ndx + n, sz)]
 
 # Deep Q Dense Neural Network
-class DQDNN(ADQN.ADQN):
+class DQDNN(ADQNN.ADQNN):
 
   def __init__(self):
-    ADQN.ACTIVATION_MODE = TANH_ACTIVATION
+    ADQNN.ACTIVATION_MODE = TANH_ACTIVATION
     super().__init__()
     self.input_shape = (1, 9)
 
@@ -45,18 +45,18 @@ class DQDNN(ADQN.ADQN):
     model = Sequential()
 
     if 0 == batch:
-      model.add(Dense(activation=ADQN.ACTIVATION_MODE, input_dim=9, units=90))
+      model.add(Dense(activation=ADQNN.ACTIVATION_MODE, input_dim=9, units=90))
     else:
-      model.add(Dense(activation=ADQN.ACTIVATION_MODE, input_dim=9, batch_size=batch, units=90))
+      model.add(Dense(activation=ADQNN.ACTIVATION_MODE, input_dim=9, batch_size=batch, units=90))
 
     model.add(Dropout(rate=0.15))
-    model.add(Dense(activation=ADQN.ACTIVATION_MODE, units=180))
+    model.add(Dense(activation=ADQNN.ACTIVATION_MODE, units=180))
     model.add(Dropout(rate=0.15))
-    model.add(Dense(activation=ADQN.ACTIVATION_MODE, units=180))
+    model.add(Dense(activation=ADQNN.ACTIVATION_MODE, units=180))
     model.add(Dropout(rate=0.15))
-    model.add(Dense(activation=ADQN.ACTIVATION_MODE, units=180))
+    model.add(Dense(activation=ADQNN.ACTIVATION_MODE, units=180))
     model.add(Dropout(rate=0.15))
-    model.add(Dense(activation=ADQN.ACTIVATION_MODE, units=180))
+    model.add(Dense(activation=ADQNN.ACTIVATION_MODE, units=180))
     model.add(Dropout(rate=0.15))
     if 0 == batch:
       model.add(Dense(activation='softmax', units=9))

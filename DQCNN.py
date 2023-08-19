@@ -1,10 +1,27 @@
-from ADQN import TANH_ACTIVATION, RELU_ACTIVATION
+"""
+    AlphaTicTacToe: Inspired by DeepMind's AlphaGo
+    Copyright (C) 2023, Damon Chong
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
+from ADQNN import TANH_ACTIVATION, RELU_ACTIVATION
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from random import shuffle
 
-import ADQN
+import ADQNN
 import keras
 import matplotlib.pyplot as plt
 import numpy as np
@@ -14,10 +31,10 @@ LABELS_FOR_WIN_LOSE_DRAW = set(["", "", ""])
 
 
 # Deep Q Convolutional Neural Network
-class DQCNN(ADQN.ADQN):
+class DQCNN(ADQNN.ADQNN):
 
   def __init__(self):
-    ADQN.ACTIVATION_MODE = TANH_ACTIVATION
+    ADQNN.ACTIVATION_MODE = TANH_ACTIVATION
     self.activation = tf.nn.relu
     super().__init__()
     self.input_shape = (1, 3, 3, 1)
