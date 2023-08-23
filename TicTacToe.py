@@ -229,8 +229,9 @@ def adhoc_incremental_NN_train(init_arr, next_move, reward, next_arr, terminal):
   # and play a number of times to improve the learning. In general, higher simulation count equal and above the
   # OPTIMAL_MCTS_WITH_PLAYOUT_COUNT tends to produce better results.
   tup = (init_arr, next_move, reward, next_arr, terminal)
+  _agent.remember(tup)
+
   for _ in range(3):
-    _agent.remember(tup)
     _agent.train_short_memory(init_arr, next_move, reward, next_arr, terminal)
 
 
