@@ -89,3 +89,27 @@ def return_train_data_list(sequence):
       size -= 1
 
   return train_list
+
+def return_train_data_list_v2(sequence):
+  train_list = list()
+
+  winner = sequence[-1].winner
+  if winner is not None:
+    reward = 1
+  else:
+    reward = 0
+
+  size = len(sequence) - 1
+
+  while size > 0:
+    c_state = sequence[size]
+    p_state = c_state.parent
+    p_ts = p_state.states
+
+    train_list.append(convert_to_tuple(p_ts, c_state, reward))
+    if reward != 0:
+      reward *= -1
+
+    size -= 1
+
+  return train_list
