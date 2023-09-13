@@ -49,9 +49,21 @@ class DQCNN(ADQNN.ADQNN):
     model.add(Conv2D(128, (3, 3), kernel_regularizer=tf.keras.regularizers.L1L2(),
                      activation=self.activation, padding='same'))
     model.add(MaxPooling2D(pool_size=(2, 2), padding='same'))
+    model.add(Conv2D(128, (3, 3), kernel_regularizer=tf.keras.regularizers.L1L2(),
+                     activation=self.activation, padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2), padding='same'))
+    model.add(Conv2D(128, (3, 3), kernel_regularizer=tf.keras.regularizers.L1L2(),
+                     activation=self.activation, padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2), padding='same'))
+    model.add(Conv2D(128, (3, 3), kernel_regularizer=tf.keras.regularizers.L1L2(),
+                     activation=self.activation, padding='same'))
+    model.add(MaxPooling2D(pool_size=(2, 2), padding='same'))
     # model.add(Dropout(0.4))
+    # model.add(Conv2D(256, (3, 3), kernel_regularizer=tf.keras.regularizers.L1L2(),
+    #                  activation=self.activation, padding='same'))
+    # model.add(MaxPooling2D(pool_size=(2, 2), padding='same'))
     model.add(Flatten())
-    model.add(Dense(256, activation=self.activation))
+    # model.add(Dense(128, activation=self.activation))
     # model.add(Dropout(0.3))
     model.add(Dense(num_classes, activation='softmax'))
     model.compile(loss='mean_squared_error',

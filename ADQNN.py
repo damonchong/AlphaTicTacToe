@@ -102,10 +102,10 @@ class ADQNN(ABC):
   def train_short_memory(self, init_arr, next_move, reward, next_arr, done):
     # reshaped and flattened current and new state
     rfc_state = np.asarray(init_arr).reshape(self.input_shape)
-    rfn_state = np.asarray(next_arr).reshape(self.input_shape)
 
     target = reward
     if not done:
+      rfn_state = np.asarray(next_arr).reshape(self.input_shape)
       target = reward + self.gamma * np.amax(self.model.predict(rfn_state)[0])
 
     future_target = self.model.predict(rfc_state)
