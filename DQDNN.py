@@ -49,15 +49,15 @@ class DQDNN(ADQNN.ADQNN):
     else:
       model.add(Dense(activation=ADQNN.ACTIVATION_MODE, input_dim=9, batch_size=batch, units=90))
 
-    model.add(Dropout(rate=0.15))
+    # model.add(Dropout(rate=0.15))
     model.add(Dense(activation=ADQNN.ACTIVATION_MODE, units=180))
-    model.add(Dropout(rate=0.15))
+    # model.add(Dropout(rate=0.15))
     model.add(Dense(activation=ADQNN.ACTIVATION_MODE, units=180))
-    model.add(Dropout(rate=0.15))
+    # model.add(Dropout(rate=0.15))
     model.add(Dense(activation=ADQNN.ACTIVATION_MODE, units=180))
-    model.add(Dropout(rate=0.15))
+    # model.add(Dropout(rate=0.15))
     model.add(Dense(activation=ADQNN.ACTIVATION_MODE, units=180))
-    model.add(Dropout(rate=0.15))
+    # model.add(Dropout(rate=0.15))
     if 0 == batch:
       model.add(Dense(activation='softmax', units=9))
     else:
