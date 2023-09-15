@@ -80,8 +80,8 @@ def create_nn_check_for_tanh():
   # c_list.append(tup)
   # tup = ([0, 0, 1, 0, 1, 0, -1, 0, 0], [1, 3, 5, 7])
   # c_list.append(tup)
-  # tup = ([0, 0, 0, 1, -1, 0, 0, 1, 0], [1, 2, 5])
-  # c_list.append(tup)
+  tup = ([0, 0, 0, 1, -1, 0, 0, 1, 0], [1, 2, 5])
+  c_list.append(tup)
   # tup = ([0, 1, 0, 1, -1, 0, 0, 0, 0], [5, 7, 8])
   # c_list.append(tup)
   tup = ([0, 1, 0, 0, -1, 1, 0, 0, 0], [3, 6, 7])
@@ -128,8 +128,8 @@ def create_nn_check_for_relu_and_sigmoid():
   # c_list.append(tup)
   # tup = ([0, 0, 1, 0, 1, 0, 2, 0, 0], [1, 3, 5, 7])
   # c_list.append(tup)
-  # tup = ([0, 0, 0, 1, 2, 0, 0, 1, 0], [1, 2, 5])
-  # c_list.append(tup)
+  tup = ([0, 0, 0, 1, 2, 0, 0, 1, 0], [1, 2, 5])
+  c_list.append(tup)
   # tup = ([0, 1, 0, 1, 2, 0, 0, 0, 0], [5, 7, 8])
   # c_list.append(tup)
   tup = ([0, 1, 0, 0, 2, 1, 0, 0, 0], [3, 6, 7])
@@ -319,7 +319,7 @@ def train_dqn(reset_data=True):
   _agent.replay(True)
   _agent.replay(True)
 
-  if INCREMENTAL_NN:
+  if TOTAL_SIMULATIONS < OPTIMAL_MCTS_COUNT:
     _agent.replay(True, _check_list)
   else:
     cnt = 2
